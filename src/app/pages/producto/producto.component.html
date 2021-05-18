@@ -1,0 +1,159 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+
+    <div class="row">
+     
+      <div class="col-xl-9">
+        <div class="card shadow">
+          <div class="card-header bg-transparent">
+            <div class="row align-items-center">
+              <div class="col-4">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">Detalle de producto</h6>
+                <h2 class="mb-0">{{producto.Nombre}}</h2>
+              </div>
+              <div class="col-2 text-right">
+                  Cantidad:
+              </div>
+              <div class="col-2 text-right">
+              <input type="text" [(ngModel)]="cantidad"  placeholder="Cantidad" class="form-control form-control-alternative">
+              </div>
+              <div class="col-4 text-right">
+               
+                <button (click)="agregarProducto(idproducto,cantidad)"   class="btn btn-icon btn-3 btn-primary" type="button">
+                    <span class="btn-inner--icon"><i class="ni ni-cart"></i></span>
+                    <span *ngIf="(producto.DisponibleBajoPedido==false && totalexistencia > 0) || totalexistencia > 0"  class="btn-inner--text">Agregar al carrito</span>
+                    <span *ngIf="producto.DisponibleBajoPedido==true && totalexistencia == 0"  class="btn-inner--text">Ordenar bajo pedido</span>
+                  </button>
+              </div>
+            </div>
+           
+          </div>
+          <div class="card-body">
+            <div class="row">
+                <div class="col-xl-4">
+                  <img src="{{producto.Fotografia}}" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="col-xl-8">
+                    <div class="text-center">
+                        <h1>
+                          Q. {{producto.Precio}} 
+                          </h1>
+                        <h4>
+                          {{producto.Descripcion}} 
+                        </h4>
+                       
+                        <hr class="my-4" />
+                        <h3>
+                           Informacion detallada del producto
+                          </h3>
+                        <p> {{producto.DescripcionDetalle}} </p>
+            
+                      </div>
+                  </div>
+            </div>
+            <hr class="my-4" />
+            <h3>Caracteriasticas agregadas</h3>
+            <div class="row">
+                <div class="col-xl-4">
+                     <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col">Categorias</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let categoria of categorias">
+                          <th   scope="row">
+                            <div class="media align-items-center">
+                              <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                                <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
+                              </a>
+                              <div class="media-body">
+                                <span class="mb-0 text-sm">{{categoria.Descripcion}}</span>
+                              </div>
+                            </div>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div> 
+                </div>
+                <div class="col-xl-4">
+                    <div class="table-responsive">
+                   <table class="table align-items-center table-flush">
+                     <thead class="thead-light">
+                       <tr>
+                         <th scope="col">Atributos adicionales</th>
+                         
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr  *ngFor="let atributo of atributos">
+                         <th  scope="row">
+                           <div class="media align-items-center">
+                             <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                               <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
+                             </a>
+                             <div class="media-body">
+                               <span class="mb-0 text-sm">{{atributo.Descripcion}}</span>
+                             </div>
+                           </div>
+                         </th>
+                         </tr>
+                     </tbody>
+                   </table>
+                 </div> 
+               </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <button [routerLink]="['/store/tienda', 0]"  class="btn btn-icon btn-3 btn-info" type="button">
+                        <span class="btn-inner--icon"><i class="ni ni-save"></i></span>
+                        <span   class="btn-inner--text">Volver</span>
+                      </button>
+                </div>
+           
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3">
+        <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">Stock</h6>
+                  <h2 class="mb-0">Detalle de existencia</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                  <div class="col-xl-12">
+                    <ul class="list-group">
+                        <li *ngFor="let existencia of existencias" class="list-group-item d-flex justify-content-between align-items-center">
+                          {{existencia.Direccion}}
+                          <span  class="badge badge-primary badge-pill">{{existencia.Existencia}}</span>
+                        </li>
+                      </ul>
+                  </div>
+                 
+  
+              </div>
+            
+            </div>
+          </div>
+      </div>
+    </div>
+    
+  </div>
+  
+

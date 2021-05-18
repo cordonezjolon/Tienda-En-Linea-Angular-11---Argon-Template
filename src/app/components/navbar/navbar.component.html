@@ -1,0 +1,109 @@
+<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="['store/tienda/0']">Ventas de computo</a>
+    <!-- Form -->
+    <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+      <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+        <div class="input-group input-group-alternative">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <input class="form-control" placeholder="Buscar producto" type="text" (focus)="focus = true"
+          (blur)="focus = false">
+        </div>
+      </div>
+    </form>
+    <!-- User -->
+ 
+    <ul class="navbar-nav align-items-center d-none d-md-flex">
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+          <a (click)="refrescar()" class="icon icon-shape text-white rounded-circle ">
+            <i class="ni ni-cart"></i>
+            <span class="badge badge-primary">{{totalproductoscarrito}}</span>
+          </a>
+        </a>
+        <div class="dropdown-menu-xl dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+          <div class="card-body">
+            <h3> Carrito de compras</h3>
+            <ul class="list-group">
+              <li *ngFor="let productocarrito of productoscarrito;let indexOfelement=index;" class="list-group-item d-flex justify-content-between align-items-center">
+               
+                {{productocarrito.Nombre}}
+                <span  class="badge badge-primary badge-pill">{{productocarrito.cantidad}}</span>
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="{{productocarrito.Fotografia}}">
+                </span>
+                <span class="badge badge-pill badge-primary">Q. {{productocarrito.Precio}}</span>
+                <a type="button" (click)="eliminarCarrito(productocarrito.Id_Carrito)" class="badge badge-pill badge-warning">X</a>
+              </li>
+            </ul>
+            <h4> Total a pagar = Q. {{totalpagar}}</h4>
+            <div class="col-lg-12 text-right">
+            <button [routerLink]="['store/carrito']" type="button"  class="btn btn-icon btn-3 btn-primary" >
+              <span class="btn-inner--icon"><i class="ni ni-save"></i></span>
+              <span   class="btn-inner--text">Ir al carrito</span>
+            </button>
+          </div>
+        </div>
+          
+
+        </div>
+      </li>
+    </ul>
+    <ul *ngIf="!usuariologueado" class="navbar-nav align-items-center d-none d-md-flex">
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+          <a (click)="refrescar()" class="icon icon-shape text-white rounded-circle ">
+            <i class="ni ni-circle-08"></i>
+          
+          </a>
+        </a>
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <div class=" dropdown-header noti-title">
+            <h6 class="text-overflow m-0">Bienvenid@!</h6>
+          </div>
+          <a routerLinkActive="active" [routerLink]="['login']" class="dropdown-item">
+            <i class="ni ni-single-02"></i>
+            <span>Ingresar</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a routerLinkActive="active" [routerLink]="['register']" class="dropdown-item">
+            <i class="ni ni-user-run"></i>
+            <span>Registrarme</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+    <ul *ngIf="usuariologueado" class="navbar-nav align-items-center d-none d-md-flex">
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a type="button"  (click)="traercarrito(datosusuario.Id_Usuario)" class="nav-link pr-0" role="button" ngbDropdownToggle>
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <img    src="{{datosusuario.Fotografia}}">
+            </span>
+            <div class="media-body ml-2 d-none d-lg-block">
+              <span class="mb-0 text-sm  font-weight-bold">{{datosusuario.PrimerNombre}} {{datosusuario.PrimerApellido}}</span>
+            </div>
+
+          </div>
+        </a>
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <div class=" dropdown-header noti-title">
+            <h6 class="text-overflow m-0">Bienvenid@!</h6>
+          </div>
+          <a routerLinkActive="active" [routerLink]="['admin/user-profile']" class="dropdown-item">
+            <i class="ni ni-single-02"></i>
+            <span>Mi Perfil</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a type="button" (click)="salir()" class="dropdown-item">
+            <i class="ni ni-user-run"></i>
+            <span>Cerrar sesion</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

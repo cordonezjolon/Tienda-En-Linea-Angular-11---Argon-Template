@@ -1,0 +1,44 @@
+<div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+       
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+     
+      <div class="col-xl-12">
+        <div class="card shadow">
+          <div class="card-header bg-transparent">
+            <div class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">Total de productos</h6>
+                <h2 class="mb-0">Tienda</h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+           <div class="row">
+               <div  ngbTooltip="Click para ver detalles" class="col-xl-3 col-lg-6" *ngFor="let producto of productos">
+                <div class="card card-stats mb-2"  style="width: 18rem;">
+                    <img [routerLink]="['/store/producto', producto.Id_Producto]" class="card-img-top" src="{{producto.Fotografia}}" alt="Card image cap" width="100" height="150">
+                    <div class="card-body">
+                      <h5 class="card-title">{{producto.Nombre}} - Q. {{producto.Precio}}</h5>
+                      <p class="card-text">{{producto.Descripcion}}</p>
+                      <a [routerLink]="['/store/producto', producto.Id_Producto]" class="btn btn-primary"><i class="ni ni-cart"></i></a>
+                      <a href="#" class="btn btn-danger"><i class="ni ni-favourite-28"></i></a>
+                    </div>
+                  </div>
+               </div>
+           
+           </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  

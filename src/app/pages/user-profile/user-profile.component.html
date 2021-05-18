@@ -1,0 +1,225 @@
+<div *ngIf="!editarperfil" class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div   class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+        <h1 class="display-2 text-white">Hola {{datosusuario.PrimerNombre}}</h1>
+        <p class="text-white mt-0 mb-5">Esta es la pantalla de gestion de tu cuenta de usuario, puedes consultar la informacion de tu cuenta, compras o etitarla.</p>
+        <a (click)="editarUsuario()"  class="btn btn-info">Editar perfil</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="editarperfil" class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+<div class="container-fluid  mt--7">
+  <div class="row">
+    <div *ngIf="!editarperfil" class="col-xl-12 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img src="{{datosusuario.Fotografia}}" class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+                 </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                <div>
+                  <span class="heading">22</span>
+                  <span class="description">Compras</span>
+                </div>
+                <div>
+                  <span class="heading">10</span>
+                  <span class="description">Garantias</span>
+                </div>
+                <div>
+                  <span class="heading">89</span>
+                  <span class="description">Pedidos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>
+              {{datosusuario.PrimerNombre}} {{datosusuario.PrimerApellido}}/{{datosusuario.username}}
+            </h3>
+            <div class="h5 font-weight-300">
+              <i class="ni location_pin mr-2"></i>{{datosusuario.Direccion}}
+            </div>
+        
+            <div class="h5 mt-4">
+              <i class="ni business_briefcase-24 mr-2"></i>NIT: {{datosusuario.NIT}}
+              <i class="ni business_briefcase-24 mr-2"></i>Telefono: {{datosusuario.Telefono}}
+            </div>
+            <div>
+              <i class="ni education_hat mr-2"></i>Correo: {{datosusuario.email}}
+            </div>
+            <hr class="my-4" />
+            <p>Bienvenido, recuerda veificar tu informacion y mantenerla actualizada.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="editarperfil" class="col-xl-12 pt-lg-2 order-xl-1 ">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Mi cuenta</h3>
+            </div>
+            <div class="col-4 text-right">
+              
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form role="form" [formGroup]="NuevoUsuario" (ngSubmit)="actualizarPerfil()">
+            <h6 class="heading-small text-muted mb-4">Informacion del producto</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-username">*Primer nombre</label>
+                    <input type="text" id="input-username"  formControlName="PrimerNombre" class="form-control form-control-alternative" placeholder="Primer nombre" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email">Segundo nombre</label>
+                    <input type="email" id="input-email"  formControlName="SegundoNombre" class="form-control form-control-alternative" placeholder="Segundo nombre">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">*Primer apellido</label>
+                    <input type="text" id="input-first-name"  formControlName="PrimerApellido" class="form-control form-control-alternative" placeholder="Primer apellido" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Segundo apellido</label>
+                    <input type="text" id="input-last-name"  formControlName="SegundoApellido" class="form-control form-control-alternative" placeholder="Segundo apellido" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">*Direccion</label>
+                    <input type="text" id="input-first-name"  formControlName="Direccion" class="form-control form-control-alternative" placeholder="Direccion" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Telefono</label>
+                    <input type="text" id="input-last-name"  formControlName="Telefono" class="form-control form-control-alternative" placeholder="Telefono" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">*Direccion de entrega</label>
+                    <input type="text" id="input-first-name"  formControlName="DireccionEntrega" class="form-control form-control-alternative" placeholder="Direccion de entrega" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Nombre facturacion</label>
+                    <input type="text" id="input-last-name"  formControlName="NombreFacturacion" class="form-control form-control-alternative" placeholder="Nombre facturacion" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">*NIT</label>
+                    <input type="text" id="input-first-name"  formControlName="NIT" class="form-control form-control-alternative" placeholder="NIT" >
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Direccion facturacion</label>
+                    <input type="text" id="input-last-name"  formControlName="DireccionFactura" class="form-control form-control-alternative" placeholder="Direccion de facturacion" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">*Departamento</label>
+                    <select formControlName="Id_Departamento" (change)="traemunicipios(NuevoUsuario.get('Id_Departamento').value)" class="form-control">
+                        <option [value]="departamento.Id_Departamento" *ngFor="let departamento of departamentos"   >
+                          {{departamento.Nombre}}
+                        </option>
+               
+                      </select>  
+                      </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                      
+                    <label class="form-control-label" for="input-first-name">*Municipio</label>
+                    <select formControlName="Id_Municipio" class="form-control">
+                        <option [value]="municipio.Id_Municipio" *ngFor="let municipio of municipios"  >
+                          {{municipio.Nombre}}
+                        </option>
+                      
+                      </select> 
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">*Fotografia</label>
+                    <input type="text" id="input-first-name"  formControlName="Fotografia" class="form-control form-control-alternative" placeholder="NIT" >
+                  </div>
+                </div>
+          
+              </div>
+              <div *ngIf="errores" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-inner--text"><strong>Aviso!</strong> {{mensajenuevo}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12 text-right">
+                    <button  class="btn btn-icon btn-3 btn-primary" type="submit">
+                        <span class="btn-inner--icon"><i class="ni ni-save"></i></span>
+                        <span   class="btn-inner--text">Guardar</span>
+                      </button>
+                      <button (click)="cambiaproceso(1)" class="btn btn-icon btn-3 btn-warning" type="button">
+                        <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
+                        <span class="btn-inner--text">Cancelar</span>
+                      </button>
+                </div>
+           
+              </div>
+            </div>
+
+            <input type="hidden" formControlName="Id_UsuarioCrea" >
+            <input type="hidden" formControlName="Id_UsuarioModifica" >
+            <input type="hidden" formControlName="Id_Usuario" >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

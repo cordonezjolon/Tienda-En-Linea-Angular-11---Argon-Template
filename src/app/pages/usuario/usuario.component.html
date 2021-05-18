@@ -1,0 +1,237 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+     
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+   
+    <div class="col-xl-12">
+      <div *ngIf="proceso==1" class="card shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h6 class="text-uppercase text-muted ls-1 mb-1">Mantenimiento</h6>
+              <h2 class="mb-0">Usuarios</h2>
+            </div>
+            <div class="col-4 text-right">
+             
+              <button (click)="cambiaproceso(2)" class="btn btn-icon btn-3 btn-primary" type="button">
+                  <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                  <span   class="btn-inner--text">Nuevo usuario</span>
+                </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+         <div class="row">
+          <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Primer Nombre</th>
+                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Fotografia</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let usuario of usuarios" >
+                      <td>
+                          {{usuario.Id_Usuario}}
+                        </td>
+                    <td>
+                      {{usuario.PrimerNombre}}
+                    </td>
+                    <td>
+                      {{usuario.PrimerApellido}}
+                    </td>
+                    <td>
+                      {{usuario.Telefono}}
+                    </td>
+                    <td>
+                      <a *ngIf="usuario.Id_Estado == 2"  class="badge badge-success">Activo</a>
+                      <a *ngIf="usuario.Id_Estado != 2"  class="badge badge-danger">Inactivo</a>
+                    </td>
+                    <td>
+                      <div class="avatar-group">
+                          <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                            <img  src="{{usuario.Fotografia}}" class="rounded-circle">
+                          </a>
+                          
+                        </div>
+                    
+                    </td>
+                    <td class="text-right">
+                      <a type="button" (click)="EditarProducto(usuario.Id_Usuario)" class="badge badge-info">Editar</a>  
+                      <a type="button" (click)="eliminarProducto(usuario.Id_Usuario)"  class="badge badge-danger">Eliminar</a>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+         </div>
+        </div>
+      </div>
+      <div *ngIf="proceso>1" class="card bg-secondary shadow">
+          <div class="card-header bg-transparent">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">Mantenimiento</h6>
+                <h2 class="mb-0">Crea nuevo usuario</h2>
+              </div>
+              <div class="col-4 text-right">
+               
+
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+              <form role="form" [formGroup]="NuevoUsuario" (ngSubmit)="crearproducto()">
+                  <h6 class="heading-small text-muted mb-4">Informacion del producto</h6>
+                  <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">*Primer nombre</label>
+                          <input type="text" id="input-username"  formControlName="PrimerNombre" class="form-control form-control-alternative" placeholder="Primer nombre" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">Segundo nombre</label>
+                          <input type="email" id="input-email"  formControlName="SegundoNombre" class="form-control form-control-alternative" placeholder="Segundo nombre">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">*Primer apellido</label>
+                          <input type="text" id="input-first-name"  formControlName="PrimerApellido" class="form-control form-control-alternative" placeholder="Primer apellido" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-name">Segundo apellido</label>
+                          <input type="text" id="input-last-name"  formControlName="SegundoApellido" class="form-control form-control-alternative" placeholder="Segundo apellido" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">*Direccion</label>
+                          <input type="text" id="input-first-name"  formControlName="Direccion" class="form-control form-control-alternative" placeholder="Direccion" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-name">Telefono</label>
+                          <input type="text" id="input-last-name"  formControlName="Telefono" class="form-control form-control-alternative" placeholder="Telefono" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">*Direccion de entrega</label>
+                          <input type="text" id="input-first-name"  formControlName="DireccionEntrega" class="form-control form-control-alternative" placeholder="Direccion de entrega" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-name">Nombre facturacion</label>
+                          <input type="text" id="input-last-name"  formControlName="NombreFacturacion" class="form-control form-control-alternative" placeholder="Nombre facturacion" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">*NIT</label>
+                          <input type="text" id="input-first-name"  formControlName="NIT" class="form-control form-control-alternative" placeholder="NIT" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-name">Direccion facturacion</label>
+                          <input type="text" id="input-last-name"  formControlName="DireccionFactura" class="form-control form-control-alternative" placeholder="Direccion de facturacion" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">*Departamento</label>
+                          <select formControlName="Id_Departamento" (change)="traemunicipios(NuevoUsuario.get('Id_Departamento').value)" class="form-control">
+                              <option [value]="departamento.Id_Departamento" *ngFor="let departamento of departamentos"   >
+                                {{departamento.Nombre}}
+                              </option>
+                     
+                            </select>  
+                            </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            
+                          <label class="form-control-label" for="input-first-name">*Municipio</label>
+                          <select formControlName="Id_Municipio" class="form-control">
+                              <option [value]="municipio.Id_Municipio" *ngFor="let municipio of municipios"  >
+                                {{municipio.Nombre}}
+                              </option>
+                            
+                            </select> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">*Fotografia</label>
+                          <input type="text" id="input-first-name"  formControlName="Fotografia" class="form-control form-control-alternative" placeholder="NIT" >
+                        </div>
+                      </div>
+                
+                    </div>
+                    <div *ngIf="errores" class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                      <span class="alert-inner--text"><strong>Aviso!</strong> {{mensajenuevo}}</span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12 text-right">
+                          <button  class="btn btn-icon btn-3 btn-primary" type="submit">
+                              <span class="btn-inner--icon"><i class="ni ni-save"></i></span>
+                              <span   class="btn-inner--text">Guardar</span>
+                            </button>
+                            <button (click)="cambiaproceso(1)" class="btn btn-icon btn-3 btn-warning" type="button">
+                              <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
+                              <span class="btn-inner--text">Cancelar</span>
+                            </button>
+                      </div>
+                 
+                    </div>
+                  </div>
+
+                  <input type="hidden" formControlName="Id_UsuarioCrea" >
+                  <input type="hidden" formControlName="Id_UsuarioModifica" >
+                  <input type="hidden" formControlName="Id_Usuario" >
+                </form>
+          </div>
+        </div>
+    </div>
+  </div>
+  
+</div>
+

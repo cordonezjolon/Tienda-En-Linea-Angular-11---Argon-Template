@@ -1,0 +1,186 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+       
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+     
+      <div class="col-xl-12">
+        <div *ngIf="proceso==1" class="card shadow">
+          <div class="card-header bg-transparent">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">Mantenimiento</h6>
+                <h2 class="mb-0">Productos</h2>
+              </div>
+              <div class="col-4 text-right">
+               
+                <button (click)="cambiaproceso(2)" class="btn btn-icon btn-3 btn-primary" type="button">
+                    <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                    <span   class="btn-inner--text">Nuevo producto</span>
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+           <div class="row">
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Codigo</th>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Fotografia</th>
+                      <th scope="col">Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let producto of productos" >
+                        <td>
+                            {{producto.Id_Producto}}
+                          </td>
+                      <td>
+                        {{producto.Nombre}}
+                      </td>
+                      <td>
+                       Q. {{producto.Precio}}
+                      </td>
+                      <td>
+                        <a *ngIf="producto.Id_Estado == 2"  class="badge badge-success">Activo</a>
+                        <a *ngIf="producto.Id_Estado != 2"  class="badge badge-danger">Inactivo</a>
+                      </td>
+                      <td>
+                        <div class="avatar-group">
+                            <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                              <img alt="Image placeholder" src="{{producto.Fotografia}}" class="rounded-circle">
+                            </a>
+                            
+                          </div>
+                      
+                      </td>
+                      <td class="text-right">
+                        <a type="button" (click)="EditarProducto(producto.Id_Producto)" class="badge badge-info">Editar</a>  
+                        <a type="button" (click)="eliminarProducto(producto.Id_Producto)"  class="badge badge-danger">Eliminar</a>
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+           </div>
+          </div>
+        </div>
+        <div *ngIf="proceso>1" class="card bg-secondary shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">Mantenimiento</h6>
+                  <h2 class="mb-0">Crea nuevo producto</h2>
+                </div>
+                <div class="col-4 text-right">
+                 
+
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+                <form role="form" [formGroup]="NuevoProducto" (ngSubmit)="crearproducto()">
+                    <h6 class="heading-small text-muted mb-4">Informacion del producto</h6>
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-username">*Nombre producto</label>
+                            <input type="text" id="input-username"  formControlName="Nombre" class="form-control form-control-alternative" placeholder="Nombre del producto" >
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">*Descripcion</label>
+                            <input type="email" id="input-email"  formControlName="Descripcion" class="form-control form-control-alternative" placeholder="Descripcion de producto">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Descripcion extendida</label>
+                            <input type="text" id="input-first-name"  formControlName="DescripcionDetalle" class="form-control form-control-alternative" placeholder="Descripcion extendida" >
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-last-name">*Precio</label>
+                            <input type="text" id="input-last-name"  formControlName="Precio" class="form-control form-control-alternative" placeholder="Precio" >
+                          </div>
+                        </div>
+                      </div>`
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">*Descuento</label>
+                            <select formControlName="Id_Descuento" class="form-control">
+                                <option  value="1">Sin Descuento</option>
+                                <option value="2">Descuento del 5%</option>
+                              </select>  
+                              </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                              
+                            <label class="form-control-label" for="input-last-name">*Disponible bajo pedido</label>
+                            <input   formControlName="DisponibleBajoPedido" class="form-control"  type="checkbox" >
+                           
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-last-name">*Fotografia</label>
+                            <input type="text" id="input-last-name"  formControlName="Fotografia" class="form-control form-control-alternative" placeholder="Ruta de la fotografia">    
+                              </div>
+                        </div>
+                   
+                      </div>
+
+                      <div *ngIf="errores" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+                        <span class="alert-inner--text"><strong>Aviso!</strong> {{mensajenuevo}}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <button  class="btn btn-icon btn-3 btn-primary" type="submit">
+                                <span class="btn-inner--icon"><i class="ni ni-save"></i></span>
+                                <span   class="btn-inner--text">Guardar</span>
+                              </button>
+                              <button (click)="cambiaproceso(1)" class="btn btn-icon btn-3 btn-warning" type="button">
+                                <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
+                                <span class="btn-inner--text">Cancelar</span>
+                              </button>
+                        </div>
+                   
+                      </div>
+                    </div>
+
+                    <input type="hidden" formControlName="Id_UsuarioCrea" >
+                    <input type="hidden" formControlName="Id_UsuarioModifica" >
+                    <input type="hidden" formControlName="Id_Producto" >
+                  </form>
+            </div>
+          </div>
+      </div>
+    </div>
+    
+  </div>
+  
